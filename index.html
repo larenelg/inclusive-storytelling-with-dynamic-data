@@ -1,0 +1,356 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Inclusive storytelling with dynamic data</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/night.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<link rel="stylesheet" href="dddperth/dddperth.css">
+		<link rel="stylesheet" href="dddperth/highcharts.css">
+
+
+		<style>
+			h1 {
+				font-size: 5rem !important;
+			}
+
+			h2 {
+				font-size: 4rem !important;
+			}
+
+			td.currency {
+				text-align: right !important;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Inclusive storytelling with (dynamic!) data</h1>
+					<aside class="notes">
+						Hi everyone, my name is Larene Le Gassick. It's so wonderful to be here in Perth. I usually live and work in Meanjin or the lands of the Turrbul and Jagera peoples, also known as Brisbane. And I pay my respects to their elders, past and present, as well as those of Noongar peoples of Whadjuk (Perth), and to all the elders of communities of anyone travelling or watching online today.
+					</aside>
+				</section>
+
+				<section>
+					<h2>About me</h2>
+					<p>
+						<ul>
+							<li class="fragment">Name: <strong>Larene (pronounced La-ren)</strong></li>
+							<li class="fragment">Pronouns: <strong>she/her</strong></li>
+							<li class="fragment">Twitter: <strong><a href="https://twitter.com/larenelg">@larenelg</a></strong></li>
+							<li class="fragment">Software engineer that specialises in <strong>accessibility</strong></li>
+							<li class="fragment">Working at <a href="https://intopia.digital"><strong>Intopia</strong></a> (we're hiring!)</li>
+							<li class="fragment">Writing an article on accessible dataviz due in December</li>
+						</ul>
+					</p>
+					<aside class="notes">
+						I am a software engineer and I work at a company called Intopia. We are a digital accessibility consultancy. If you end up enjoying this talk and would like to talk about accessibility at work all day, please do consider checking out our "Work with us" page. We work with some pretty hecticly cool people and companies who are passionate about making sure their software is accessible, in fact some of you may have worked with us before. If you don't end up enjoying this talk, but would still like to talk about accessibility all day, then please do still consider joining and I'll promise not to give anymore talks.
+					</aside>
+				</section>
+
+				<section>
+					<h2>The story behind this talk</h2>
+					<aside class="notes">
+						I did a talk in February of 2020 at the Brisbane Data Science Meetup, one of my favourite people and meetups (hi Enrique, if you're watching!). I also gave a version of a talk with a speed graph re-design - it's admitted not the most accessible talk I've given, a very visual-only talk, but it does cover a lot of dataviz accessibility basics, and I recommend you watch it after this talk. It was a talk called "Inclusive storytelling with data", this talk is a reprise of that, with a dynamic spin. 
+					</aside>
+				</section>
+
+				<section>
+					<h2><em>Storytelling with Data</em> by Cole Nussbaumer Knaflic
+					</h2>
+					<img src="/images/storytelling-with-data-book-cover.avif" alt="Storytelling with data book cover" />
+					<aside class="notes">
+						The original talk was very  much inspired by a book titled "Storytelling with data" by Cole Nussbaumer Knaflic, who spent much of their career at Google, teaching people how to communicate better with data.
+					</aside>
+				</section>
+
+				<section>
+					<h2><span class="fragment">accessible</span> dataviz === <span class="fragment">inclusive</span> design</h2>
+					<aside class="notes">
+						If you want to make accessible data visualisations, you will first need to learn a little bit about design! A well-designed data visualisation is easy to interpret and understand. Good design takes into account the needs of the users, and some of those users will have disabilities. Inclusive design is the key to good design, and considers disability, language, culture, gender, age, and other forms of human difference. 
+					</aside>
+				</section>
+
+				<section>
+					<div style="display:flex;">
+						<div style="flex:1;">
+							<h2 style="flex: 1">Inclusive design</h2>
+							<p><a href="https://www.microsoft.com/design/inclusive/">Inclusive Design by Microsoft</a></p>
+						</div>
+						<div style="flex:1;">
+							<img src="/images/inclusive-design-mismatch.jpeg" 
+							height="500px"
+							alt="A table with 3 columns and 4 rows. The column headers are Permanent, Temporary, and Situational disability, and the row headers are equivalent to Motor, Vision, Hearing, and Speech. A permanent motor disability is missing an arm, while a temporary motor disability is having a broken arm, and a situational disability is a parent carrying a newborn. Each cell contains a minimalist vector illustration representing each example of a permanent, temporary, or situational disability example for each disability category.
+							">
+						</div>
+					</div>
+					<aside class="notes">
+						There is now a very often shared diagram about inclusive design, you may have seen it or known it before. It's a table with 3 columns and 4 rows. The columns refer to examples of Permanent, Temporary, and Situational disability, and the rows refer to senses such as Motor, Vision, Hearing, and Speech. A permanent motor disability is missing an arm, while a temporary motor disability is having a broken arm, and a situational disability is a parent carrying a newborn. You can come up with your own examples for the others. The goal of this graphic is to illustrate that if disability is viewed as a mismatch between a person and their environment, designing for disability actually benefits everyone. So, designing a chart accessibly, will help your dataviz be understood by more people!
+
+						If you want to learn more about inclusive design, please check out Microsoft's inclusive design toolkit. 
+					</aside>
+				</section>
+
+				<section>
+					<h2>Accessibility is not "one size fits all"</h2>
+					<p>It is providing multiple pathways to people with differents needs, so that they may achieve the same goal.</p>
+					<aside class="notes">
+						
+					</aside>
+				</section>
+
+				<section>
+					<h2>Examples of dynamic charts without inclusive design</h2>
+					<iframe width="800" height="450" src="https://www.youtube.com/embed/SWB-KLXN-Ok?start=826" title="YouTube video player - Frank Elavsky, Larene Le Gassick, Sarah Fossheim—Outlier 2021—Are your visualizations excluding ppl?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					<aside class="notes">
+						When I first gave this talk, I only covered how to make images of graphs more accessible. But since then, dynamic, or programmatic data visualisations have become more popular, especially with the beginning of COVID and the US election happening at the same time. Interactive graphs and election maps were everywhere!
+
+						Unfortunately, not many of these HTML graphs were accessible. And by that I mean, apart from colour contrast issues, or a lack of a descriptive title and axes - they generally didn't work with a keyboard, and they absolutely didn't work with a screen reader. Important health and political information was exclusively for sighted people who could use a mouse.
+
+						Here is an example of one of the most famous interactive data visualisations for the US election in 2020.
+					</aside>
+				</section>
+
+				<section>
+					<h2>What do you need to do to make an accessible HTML chart?</h2>
+					<p class="fragment">Use <a href="https://www.highcharts.com">Highcharts</a>.</p>
+					<aside class="notes">
+						That is not very useful information!
+
+						So, how do we make an accessible HTML chart?
+
+						Luckily, in the last few years, one particular company has made it very easy.
+
+						Use the High Charts Javascript Charting library, include the recommended accessibility modules, and off you go!
+
+						Thanks for coming to my talk.
+
+						Jokes aside, unless you have a giant development team, you probably don't want be writing your own dataviz library, especially if you want it to be accessible. High Charts isn't the only library out there, but it is one of the most fully featured, and constantly improving.
+					</aside>
+				</section>
+
+				<section>
+					<h2 class="visually-hidden">Seq storage chart screenshot</h2>
+					<img src="/images/seq-storage-page-chart.png" alt="Screenshot of a browser application called Seq, logging software. Storage page - visualise how disk space is used by the event store, contains a column chart with stored data per 4 hours as the y-axis, and date was the x-axis. There are 5 sporadic columns that go up to 29kB per 4 hours, green and blue, and one column near the center of a large chunk of green columns is slightly lighter, and shows a tooltip 12AM, 24 Aug 22 - buffered (blue) 0 bytes, indexed (green) 16kB.">
+					<aside class="notes">
+						A few years ago, I built a dynamic chart when I worked for a logging company, to show how effective the log retention policies were on keeping the disk space maintainable. It was a bar chart that ended up keyboard accessible, using d3.js. It was also designed to be screen reader accessible, but it is probably a horrendous experience for them, with a lot of repetition, and sadly it wasn't tested with real screen reader users.
+					</aside>
+				</section>
+
+				<section>
+					<h2 class="visually-hidden">Seq storage chart accessibility tree screenshot</h2>
+					<img src="/images/seq-storage-page-chart-accessibility-tree.png" alt="Screenshot of developer tools showing the semantic accessibility nodes of the SVG. A long list of links with each link text being similar to Stored data per day at 4.10pm, 21 May 22: indexed, 28kB. Only changing the date at the kB indexed.">
+				</section>
+
+				<section data-background-iframe="https://www.highcharts.com/blog/accessibility" data-background-interactive>
+					<h2 class="visually-hidden">Highcharts hompage</h2>
+					<p class="visually-hidden">This slide contains an iframe for the Highcharts.com accessibility page</p>
+					<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+						<p>Loading highcharts page... <strong>caution, slight flash of white.</strong></p>
+					</div>
+					<aside class="notes">
+						Alternatively, a bunch of research, and user-testing has gone into the HighCharts products, they've done the work so you don't have to. Well, you still have to do some, but not as much as coding it from scratch.
+					</aside>
+				</section>
+
+				<section>
+					<h2>How do we make images of charts accessible?</h2>
+					<img src="/images/webaim-screenreader-survey-graph.png" alt="Line chart of primary screen reader usage since October 2009. JAWS has a steady decline from 68% to 40% in 2019, but jumped to 54% in 2021. NVDA has steady incline from 3% to 41%, then down to 31% in 2021. VoiceOver has a slow incline from 10% to 13%, then down to 7% in 2021. The chart is missing a title and axes labels, and the line colours are light, however there are labels are alongside the lines.">
+					<p>Source: <a href="https://webaim.org/projects/screenreadersurvey9/">WebAIM: Screen Reader User Survey #9 Results (2021)</a></p>
+					<aside class="notes">
+						So, let's make a graph! But first, let's talk about graphs that are images - how do we make these accessible?
+
+						If your graph is just an image, there are a few steps to make it accessible. Testing the contrast of elements, making sure title and labels are there, and making sure there is appropriate alternative text. Generally a static image of a chart exists to support a fact or conclusion in the surrounding text. Luckily, a dataviz specialist Amy Cesal wrote a deceptively simple template to help you write alternative text for your images of charts!
+					</aside>
+				</section>
+
+				<section>
+					<h2>Quick checklist of checks</h2>
+					<ul>
+						<li>Content - title, axes, number formatting</li>
+						<li>Visual - contrast, colour (or not relying on colour), font</li>
+						<li>Non-visual - alternative text</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Alt text for charts</h2>
+					<img src="/images/amy-cesal-alt-text-template.png" alt="HTML snippet - alt equals (chart type) of (type of data) where (reason for chart). Include a (link to the data source) somewhere in the text.">
+					<p>Source: <a href="https://medium.com/nightingale/writing-alt-text-for-data-visualization-2a218ef43f81">Writing Alt Text for Data Visualization by Amy Cesal</a></p>
+				</section>
+
+				<section>
+					<h2>Practice adding alt text to your #DDDPerth tweets!</h2>
+					<p></p>
+					<aside class="notes">
+						For those who don't know, adding alternative text allows people who use screen readers to understand what is in an image. If you are tweeting today, please make sure you add alt text to your tweets, or LinkedIn posts, so that low vision or other people who use screen readers can participate as well. It's not easy if you're not used to it, but please try! You can now check out what alt-text other conference go-ers are adding, to help you learn about what to write. Or, feel free to take a look through my Twitter account.
+					</aside>
+				</section>
+
+				<section>
+					<h2>How to make accessible HTML charts</h2>
+					<aside class="notes">
+						Back to dataviz. So, what if we need to create a chart that works with changing data? For example, most people here probably have a banking or other finance app, either on their phone, or via a web browser. Have you thought about the HTML and JS used to build it?
+					</aside>
+				</section>
+
+				<section>
+					<h2>Start with a table of data</h2>
+					<table>
+						<thead>
+							<tr>
+								<th scope="col">Month</th>
+								<th scope="col">Incoming</th>
+								<th scope="col">Outgoing</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">Jul 2022</th>
+								<td class="currency">$1,293</td>
+								<td class="currency">$382</td>
+							</tr>
+							<tr>
+								<th scope="row">Aug 2022</th>
+								<td class="currency">$1,928</td>
+								<td class="currency">$2,310</td>
+							</tr>
+							<tr>
+								<th scope="row">Sep 2022</th>
+								<td class="currency">$1,293</td>
+								<td class="currency">$1,003</td>
+							</tr>
+						</tbody>
+					</table>
+					<aside class="notes">
+						Usually, we start with a table of data, it's usually in a spreadsheet - which is handy! You should keep this around, we'll use it later. Actually, this is a good time to ask - do we really need a chart for this? Can it just be a table? If the answer is yes, all you need to do is to make sure the table uses the correct semantic HTML, so that the screen reader experience is good, and voila - an accessible, dynamic dataviz!
+					</aside>
+				</section>
+
+				<section>
+					<h2>Accessible HTML tables</h2>
+					<pre><code class="html"  data-line-numbers="|5,6|11,16,21|12,13,17,18,22,23"><table>
+	<thead>
+		<tr>
+			<th></th>
+			<th scope="col">Incoming</th>
+			<th scope="col">Outgoing</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">Jun 2022</th>
+			<td class="currency">$1,293</td>
+			<td class="currency">$382</td>
+		</tr>
+		<tr>
+			<th scope="row">Aug 2022</th>
+			<td class="currency">$1,928</td>
+			<td class="currency">$2,310</td>
+		</tr>
+		<tr>
+			<th scope="row">Sep 2022</th>
+			<td class="currency">$1,293</td>
+			<td class="currency">$1,003</td>
+		</tr>
+	</tbody>
+</table>
+					</code></pre>
+					<p>Reference: <a href="https://www.w3.org/WAI/tutorials/tables/">Tables Tutorial | Web Accessibility Initiative (WAI) | W3C</a></p>
+				</section>
+
+				<section>
+					<h2>An interactive chart</h2>
+					<a href="#">A link before the chart</a>
+					<figure class="highcharts-figure" style="height: 400px;">
+						<div id="bank-chart-1"></div>
+					</figure>
+					<a href="#">A link after the chart</a>
+					<aside class="notes">
+
+					</aside>
+				</section>
+
+				<section>
+					<h2>Under the hood</h2>
+					<section>
+						<h3>Steps to making a HTML chart accessible:</h3>
+						<ul>
+							<li>Using javascript to add mouse/keyboard interactivity</li>
+							<li>Adding ARIA to parts of the SVG to give it meaning</li>
+							<li>Adding non-visual content describing the chart for the screen reader user</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Keyboard navigation</h3>
+						<ul>
+							<li>Tab to the main bits</li>
+							<li>Arrow keys between data points</li>
+							<li>Space/Enter for buttons</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Screen reader</h3>
+						<ul>
+							<li>Frontload the info - title, anatomy</li>
+							<li>Give a choice to skip</li>
+							<li>Do not "get too creative" with ARIA</li>
+							<li>If you role your own, test, test, test!</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<h2>A note on colour</h2>
+					<ul>
+						<li>Choose monochrome palettes, if possible</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Resources</h2>
+					<ul>
+						<li><a href="https://chartability.github.io/POUR-CAF/">Chartability</a></li>
+						<li><a href="https://github.com/dataviza11y">Dataviza11y GitHub</a></li>
+						<li><a href="https://www.storytellingwithdata.com/">Storytelling with data</a></li>
+						<li><a href="https://youtu.be/ZQmAVotrzUI?t=11758">My DataEngConf talk</a></li>
+						<li><a href="https://www.youtube.com/watch?v=SWB-KLXN-Ok">Our Outlier talk</a></li>
+					</ul>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+
+		<!-- Highcharts -->
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<!-- <script src="https://code.highcharts.com/modules/accessibility.js"></script> -->
+		<!-- <script src="https://code.highcharts.com/modules/exporting.js"></script> -->
+		<!-- <script src="https://code.highcharts.com/modules/export-data.js"></script> -->
+
+		<script src="dddperth/highcharts-data.js"></script>
+	</body>
+</html>
